@@ -16,19 +16,19 @@ public class AppApplication extends Application {
 		mAppApplication = this;
 	}
 
-	/** ��ȡApplication */
+	/** 获取Application */
 	public static AppApplication getApp() {
 		return mAppApplication;
 	}
 	
-	/** ��ȡ��ݿ�Helper */
+	/** 获取数据库Helper */
 	public SQLHelper getSQLHelper() {
 		if (sqlHelper == null)
 			sqlHelper = new SQLHelper(mAppApplication);
 		return sqlHelper;
 	}
 	
-	/** �ݻ�Ӧ�ý��ʱ����� */
+	/** 摧毁应用进程时候调用 */
 	public void onTerminate() {
 		if (sqlHelper != null)
 			sqlHelper.close();

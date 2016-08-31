@@ -17,7 +17,7 @@ public class DBUtil {
 		mSQLiteDatabase = mSQLHelp.getWritableDatabase();
 	}
 	/**
-	 * ��ʼ����ݿ����DBUtil��
+	 * 初始化数据库操作DBUtil类
 	 */
 	public static DBUtil getInstance(Context context) {
 		if (mInstance == null) {
@@ -26,7 +26,7 @@ public class DBUtil {
 		return mInstance;
 	}
 	/**
-	 * �ر���ݿ�
+	 * 关闭数据库
 	 */
 	public void close() {
 		mSQLHelp.close();
@@ -37,14 +37,14 @@ public class DBUtil {
 	}
 
 	/**
-	 * ������
+	 * 添加数据
 	 */
 	public void insertData(ContentValues values) {
 		mSQLiteDatabase.insert(SQLHelper.TABLE_CHANNEL, null, values);
 	}
 
 	/**
-	 * �������
+	 * 更新数据
 	 * 
 	 * @param values
 	 * @param whereClause
@@ -57,7 +57,7 @@ public class DBUtil {
 	}
 
 	/**
-	 * ɾ�����
+	 * 删除数据
 	 * 
 	 * @param whereClause
 	 * @param whereArgs
@@ -68,7 +68,7 @@ public class DBUtil {
 	}
 
 	/**
-	 * ��ѯ���
+	 * 查询数据
 	 * 
 	 * @param columns
 	 * @param selection

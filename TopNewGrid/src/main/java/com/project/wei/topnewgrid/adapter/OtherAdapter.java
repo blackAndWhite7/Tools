@@ -1,6 +1,5 @@
 package com.project.wei.topnewgrid.adapter;
 
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +16,9 @@ public class OtherAdapter extends BaseAdapter {
 	private Context context;
 	public List<ChannelItem> channelList;
 	private TextView item_text;
-	/** �Ƿ�ɼ� */
+	/** 是否可见 */
 	boolean isVisible = true;
-	/** Ҫɾ���position */
+	/** 要删除的position */
 	public int remove_position = -1;
 
 	public OtherAdapter(Context context, List<ChannelItem> channelList) {
@@ -60,41 +59,41 @@ public class OtherAdapter extends BaseAdapter {
 		return view;
 	}
 	
-	/** ��ȡƵ���б� */
+	/** 获取频道列表 */
 	public List<ChannelItem> getChannnelLst() {
 		return channelList;
 	}
 	
-	/** ���Ƶ���б� */
+	/** 添加频道列表 */
 	public void addItem(ChannelItem channel) {
 		channelList.add(channel);
 		notifyDataSetChanged();
 	}
 
-	/** ����ɾ���position */
+	/** 设置删除的position */
 	public void setRemove(int position) {
 		remove_position = position;
 		notifyDataSetChanged();
 		// notifyDataSetChanged();
 	}
 
-	/** ɾ��Ƶ���б� */
+	/** 删除频道列表 */
 	public void remove() {
 		channelList.remove(remove_position);
 		remove_position = -1;
 		notifyDataSetChanged();
 	}
-	/** ����Ƶ���б� */
+	/** 设置频道列表 */
 	public void setListDate(List<ChannelItem> list) {
 		channelList = list;
 	}
 
-	/** ��ȡ�Ƿ�ɼ� */
+	/** 获取是否可见 */
 	public boolean isVisible() {
 		return isVisible;
 	}
 	
-	/** �����Ƿ�ɼ� */
+	/** 设置是否可见 */
 	public void setVisible(boolean visible) {
 		isVisible = visible;
 	}

@@ -3,7 +3,7 @@ package com.project.wei.topnewgrid.bean;
 import java.io.Serializable;
 
 /** 
- * ITEM�Ķ�Ӧ���򻯶�������
+ * ITEM的对应可序化队列属性
  *  */
 public class ChannelItem implements Serializable {
 	/**
@@ -11,19 +11,19 @@ public class ChannelItem implements Serializable {
 	 */
 	private static final long serialVersionUID = -6465237897027410019L;
 	/** 
-	 * ��Ŀ��ӦID
+	 * 栏目对应ID
 	 *  */
 	public Integer id;
 	/** 
-	 * ��Ŀ��ӦNAME
+	 * 栏目对应NAME
 	 *  */
 	public String name;
 	/** 
-	 * ��Ŀ�������е�����˳��  rank
+	 * 栏目在整体中的排序顺序  rank
 	 *  */
 	public Integer orderId;
 	/** 
-	 * ��Ŀ�Ƿ�ѡ��
+	 * 栏目是否选中
 	 *  */
 	public Integer selected;
 

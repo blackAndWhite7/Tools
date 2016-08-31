@@ -30,23 +30,23 @@ import com.project.wei.topnewgrid.view.OtherGridView;
 import java.util.ArrayList;
 
 /**
- * Ƶ������
+ * 频道管理
 
  */
 public class ChannelActivity extends Activity implements OnItemClickListener {
-	/** �û���Ŀ��GRIDVIEW */
+	/** 用户栏目的GRIDVIEW */
 	private DragGrid userGridView;
-	/** ������Ŀ��GRIDVIEW */
+	/** 其它栏目的GRIDVIEW */
 	private OtherGridView otherGridView;
-	/** �û���Ŀ��Ӧ���������������϶� */
+	/** 用户栏目对应的适配器，可以拖动 */
 	DragAdapter userAdapter;
-	/** ������Ŀ��Ӧ�������� */
+	/** 其它栏目对应的适配器 */
 	OtherAdapter otherAdapter;
-	/** ������Ŀ�б� */
+	/** 其它栏目列表 */
 	ArrayList<ChannelItem> otherChannelList = new ArrayList<ChannelItem>();
-	/** �û���Ŀ�б� */
+	/** 用户栏目列表 */
 	ArrayList<ChannelItem> userChannelList = new ArrayList<ChannelItem>();
-	/** �Ƿ����ƶ�����������Ƕ��������Ž��е���ݸ��棬�����������Ϊ�˱������̫Ƶ����ɵ���ݴ��ҡ� */	
+	/** 是否在移动，由于这边是动画结束后才进行的数据更替，设置这个限制为了避免操作太频繁造成的数据错乱。 */	
 	boolean isMove = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class ChannelActivity extends Activity implements OnItemClickListener {
 		initData();
 	}
 	
-	/** ��ʼ�����*/
+	/** 初始化数据*/
 	private void initData() {
 	    userChannelList = ((ArrayList<ChannelItem>) ChannelManage.getManage(AppApplication.getApp().getSQLHelper()).getUserChannel());
 	    otherChannelList = ((ArrayList<ChannelItem>)ChannelManage.getManage(AppApplication.getApp().getSQLHelper()).getOtherChannel());
@@ -64,12 +64,12 @@ public class ChannelActivity extends Activity implements OnItemClickListener {
 	    userGridView.setAdapter(userAdapter);
 	    otherAdapter = new OtherAdapter(this, otherChannelList);
 	    otherGridView.setAdapter(this.otherAdapter);
-	    //����GRIDVIEW��ITEM�ĵ������
+	    //设置GRIDVIEW的ITEM的点击监听
 	    otherGridView.setOnItemClickListener(this);
 	    userGridView.setOnItemClickListener(this);
 	}
 	
-	/** ��ʼ������*/
+	/** 初始化布局*/
 	private void initView() {
 		userGridView = (DragGrid) findViewById(R.id.userGridView);
 		otherGridView = (OtherGridView) findViewById(R.id.otherGridView);
@@ -82,31 +82,31 @@ public class ChannelActivity extends Activity implements OnItemClickListener {
 		return true;
 	}
 	
-	/** GRIDVIEW��Ӧ��ITEM�������ӿ�  */
+	/** GRIDVIEW对应的ITEM点击监听接口  */
 	@Override
 	public void onItemClick(AdapterView<?> parent, final View view, final int position,long id) {
-		//�������ʱ��֮ǰ������û������ô���õ���¼���Ч
+		//如果点击的时候，之前动画还没结束，那么就让点击事件无效
 		if(isMove){
 			return;
 		}
 		switch (parent.getId()) {
 		case R.id.userGridView:
-			//positionΪ 0��1 �Ĳ����Խ����κβ���
+			//position为 0，1 的不可以进行任何操作
 			if (position != 0 && position != 1) {
 				final ImageView moveImageView = getView(view);
 				if (moveImageView != null) {
 					TextView newTextView = (TextView) view.findViewById(R.id.text_item);
 					final int[] startLocation = new int[2];
 					newTextView.getLocationInWindow(startLocation);
-					final ChannelItem channel = ((DragAdapter) parent.getAdapter()).getItem(position);//��ȡ�����Ƶ������
+					final ChannelItem channel = ((DragAdapter) parent.getAdapter()).getItem(position);//获取点击的频道内容
 					otherAdapter.setVisible(false);
-					//��ӵ����һ��
+					//添加到最后一个
 					otherAdapter.addItem(channel);
 					new Handler().postDelayed(new Runnable() {
 						public void run() {
 							try {
 								int[] endLocation = new int[2];
-								//��ȡ�յ�����
+								//获取终点的坐标
 								otherGridView.getChildAt(otherGridView.getLastVisiblePosition()).getLocationInWindow(endLocation);
 								MoveAnim(moveImageView, startLocation , endLocation, channel,userGridView);
 								userAdapter.setRemove(position);
@@ -125,13 +125,13 @@ public class ChannelActivity extends Activity implements OnItemClickListener {
 				newTextView.getLocationInWindow(startLocation);
 				final ChannelItem channel = ((OtherAdapter) parent.getAdapter()).getItem(position);
 				userAdapter.setVisible(false);
-				//��ӵ����һ��
+				//添加到最后一个
 				userAdapter.addItem(channel);
 				new Handler().postDelayed(new Runnable() {
 					public void run() {
 						try {
 							int[] endLocation = new int[2];
-							//��ȡ�յ�����
+							//获取终点的坐标
 							userGridView.getChildAt(userGridView.getLastVisiblePosition()).getLocationInWindow(endLocation);
 							MoveAnim(moveImageView, startLocation , endLocation, channel,otherGridView);
 							otherAdapter.setRemove(position);
@@ -146,7 +146,7 @@ public class ChannelActivity extends Activity implements OnItemClickListener {
 		}
 	}
 	/**
-	 * ���ITEM�ƶ�����
+	 * 点击ITEM移动动画
 	 * @param moveView
 	 * @param startLocation
 	 * @param endLocation
@@ -156,19 +156,19 @@ public class ChannelActivity extends Activity implements OnItemClickListener {
 	private void MoveAnim(View moveView, int[] startLocation,int[] endLocation, final ChannelItem moveChannel,
 			final GridView clickGridView) {
 		int[] initLocation = new int[2];
-		//��ȡ���ݹ�����VIEW�����
+		//获取传递过来的VIEW的坐标
 		moveView.getLocationInWindow(initLocation);
-		//�õ�Ҫ�ƶ���VIEW,�������Ӧ��������
+		//得到要移动的VIEW,并放入对应的容器中
 		final ViewGroup moveViewGroup = getMoveViewGroup();
 		final View mMoveView = getMoveView(moveViewGroup, moveView, initLocation);
-		//�����ƶ�����
+		//创建移动动画
 		TranslateAnimation moveAnimation = new TranslateAnimation(
 				startLocation[0], endLocation[0], startLocation[1],
 				endLocation[1]);
-		moveAnimation.setDuration(300L);//����ʱ��
-		//��������
+		moveAnimation.setDuration(300L);//动画时间
+		//动画配置
 		AnimationSet moveAnimationSet = new AnimationSet(true);
-		moveAnimationSet.setFillAfter(false);//����Ч��ִ����Ϻ�View���󲻱�������ֹ��λ��
+		moveAnimationSet.setFillAfter(false);//动画效果执行完毕后，View对象不保留在终止的位置
 		moveAnimationSet.addAnimation(moveAnimation);
 		mMoveView.startAnimation(moveAnimationSet);
 		moveAnimationSet.setAnimationListener(new AnimationListener() {
@@ -185,7 +185,7 @@ public class ChannelActivity extends Activity implements OnItemClickListener {
 			@Override
 			public void onAnimationEnd(Animation animation) {
 				moveViewGroup.removeView(mMoveView);
-				// instanceof �����ж�2��ʵ���ǲ���һ���жϵ������DragGrid����OtherGridView
+				// instanceof 方法判断2边实例是不是一样，判断点击的是DragGrid还是OtherGridView
 				if (clickGridView instanceof DragGrid) {
 					otherAdapter.setVisible(true);
 					otherAdapter.notifyDataSetChanged();
@@ -201,7 +201,7 @@ public class ChannelActivity extends Activity implements OnItemClickListener {
 	}
 	
 	/**
-	 * ��ȡ�ƶ���VIEW�������ӦViewGroup��������
+	 * 获取移动的VIEW，放入对应ViewGroup布局容器
 	 * @param viewGroup
 	 * @param view
 	 * @param initLocation
@@ -219,7 +219,7 @@ public class ChannelActivity extends Activity implements OnItemClickListener {
 	}
 	
 	/**
-	 * �����ƶ���ITEM��Ӧ��ViewGroup��������
+	 * 创建移动的ITEM对应的ViewGroup布局容器
 	 */
 	private ViewGroup getMoveViewGroup() {
 		ViewGroup moveViewGroup = (ViewGroup) getWindow().getDecorView();
@@ -230,7 +230,7 @@ public class ChannelActivity extends Activity implements OnItemClickListener {
 	}
 	
 	/**
-	 * ��ȡ�����Item�Ķ�ӦView��
+	 * 获取点击的Item的对应View，
 	 * @param view
 	 * @return
 	 */
@@ -244,7 +244,7 @@ public class ChannelActivity extends Activity implements OnItemClickListener {
 		return iv;
 	}
 	
-	/** �˳�ʱ�򱣴�ѡ�����ݿ������  */
+	/** 退出时候保存选择后数据库的设置  */
 	private void saveChannel() {
 		ChannelManage.getManage(AppApplication.getApp().getSQLHelper()).deleteAllChannel();
 		ChannelManage.getManage(AppApplication.getApp().getSQLHelper()).saveUserChannel(userAdapter.getChannnelLst());

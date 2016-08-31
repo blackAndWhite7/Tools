@@ -16,20 +16,20 @@ import java.util.List;
 public class DragAdapter extends BaseAdapter {
 	/** TAG*/
 	private final static String TAG = "DragAdapter";
-	/** �Ƿ���ʾ�ײ���ITEM */
+	/** 是否显示底部的ITEM */
 	private boolean isItemShow = false;
 	private Context context;
-	/** ���Ƶ�postion */
+	/** 控制的postion */
 	private int holdPosition;
-	/** �Ƿ�ı� */
+	/** 是否改变 */
 	private boolean isChanged = false;
-	/** �Ƿ�ɼ� */
+	/** 是否可见 */
 	boolean isVisible = true;
-	/** �����϶����б?���û�ѡ���Ƶ���б? */
+	/** 可以拖动的列表（即用户选择的频道列表） */
 	public List<ChannelItem> channelList;
-	/** TextView Ƶ������ */
+	/** TextView 频道内容 */
 	private TextView item_text;
-	/** Ҫɾ���position */
+	/** 要删除的position */
 	public int remove_position = -1;
 
 	public DragAdapter(Context context, List<ChannelItem> channelList) {
@@ -85,13 +85,13 @@ public class DragAdapter extends BaseAdapter {
 		return view;
 	}
 
-	/** ���Ƶ���б� */
+	/** 添加频道列表 */
 	public void addItem(ChannelItem channel) {
 		channelList.add(channel);
 		notifyDataSetChanged();
 	}
 
-	/** �϶����Ƶ������ */
+	/** 拖动变更频道排序 */
 	public void exchange(int dragPostion, int dropPostion) {
 		holdPosition = dropPostion;
 		ChannelItem dragItem = getItem(dragPostion);
@@ -107,39 +107,39 @@ public class DragAdapter extends BaseAdapter {
 		notifyDataSetChanged();
 	}
 	
-	/** ��ȡƵ���б� */
+	/** 获取频道列表 */
 	public List<ChannelItem> getChannnelLst() {
 		return channelList;
 	}
 
-	/** ����ɾ���position */
+	/** 设置删除的position */
 	public void setRemove(int position) {
 		remove_position = position;
 		notifyDataSetChanged();
 	}
 
-	/** ɾ��Ƶ���б� */
+	/** 删除频道列表 */
 	public void remove() {
 		channelList.remove(remove_position);
 		remove_position = -1;
 		notifyDataSetChanged();
 	}
 	
-	/** ����Ƶ���б� */
+	/** 设置频道列表 */
 	public void setListDate(List<ChannelItem> list) {
 		channelList = list;
 	}
 	
-	/** ��ȡ�Ƿ�ɼ� */
+	/** 获取是否可见 */
 	public boolean isVisible() {
 		return isVisible;
 	}
 	
-	/** �����Ƿ�ɼ� */
+	/** 设置是否可见 */
 	public void setVisible(boolean visible) {
 		isVisible = visible;
 	}
-	/** ��ʾ���µ�ITEM */
+	/** 显示放下的ITEM */
 	public void setShowDropItem(boolean show) {
 		isItemShow = show;
 	}

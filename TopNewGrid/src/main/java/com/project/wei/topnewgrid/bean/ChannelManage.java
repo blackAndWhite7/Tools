@@ -13,37 +13,37 @@ import java.util.Map;
 public class ChannelManage {
 	public static ChannelManage channelManage;
 	/**
-	 * ??????????????б?
+	 * 默认的用户选择频道列表
 	 * */
 	public static List<ChannelItem> defaultUserChannels;
 	/**
-	 * ????????????б?
+	 * 默认的其他频道列表
 	 * */
 	public static List<ChannelItem> defaultOtherChannels;
 	private ChannelDao channelDao;
-	/** ?ж??????????????????? */
+	/** 判断数据库中是否存在用户数据 */
 	private boolean userExist = false;
 	static {
 		defaultUserChannels = new ArrayList<ChannelItem>();
 		defaultOtherChannels = new ArrayList<ChannelItem>();
-		defaultUserChannels.add(new ChannelItem(1, "???", 1, 1));
-		defaultUserChannels.add(new ChannelItem(2, "???", 2, 1));
-		defaultUserChannels.add(new ChannelItem(3, "????", 3, 1));
-		defaultUserChannels.add(new ChannelItem(4, "???", 4, 1));
-		defaultUserChannels.add(new ChannelItem(5, "???", 5, 1));
-		defaultUserChannels.add(new ChannelItem(6, "????", 6, 1));
-		defaultUserChannels.add(new ChannelItem(7, "????", 7, 1));
-		defaultOtherChannels.add(new ChannelItem(8, "???", 1, 0));
-		defaultOtherChannels.add(new ChannelItem(9, "??", 2, 0));
-		defaultOtherChannels.add(new ChannelItem(10, "????", 3, 0));
-		defaultOtherChannels.add(new ChannelItem(11, "???", 4, 0));
-		defaultOtherChannels.add(new ChannelItem(12, "???", 5, 0));
-		defaultOtherChannels.add(new ChannelItem(13, "???", 6, 0));
-		defaultOtherChannels.add(new ChannelItem(14, "????", 7, 0));
-		defaultOtherChannels.add(new ChannelItem(15, "????", 8, 0));
-		defaultOtherChannels.add(new ChannelItem(16, "???", 9, 0));
-		defaultOtherChannels.add(new ChannelItem(17, "???", 10, 0));
-		defaultOtherChannels.add(new ChannelItem(18, "????", 11, 0));
+		defaultUserChannels.add(new ChannelItem(1, "推荐", 1, 1));
+		defaultUserChannels.add(new ChannelItem(2, "热点", 2, 1));
+		defaultUserChannels.add(new ChannelItem(3, "娱乐", 3, 1));
+		defaultUserChannels.add(new ChannelItem(4, "时尚", 4, 1));
+		defaultUserChannels.add(new ChannelItem(5, "科技", 5, 1));
+		defaultUserChannels.add(new ChannelItem(6, "体育", 6, 1));
+		defaultUserChannels.add(new ChannelItem(7, "军事", 7, 1));
+		defaultOtherChannels.add(new ChannelItem(8, "财经", 1, 0));
+		defaultOtherChannels.add(new ChannelItem(9, "汽车", 2, 0));
+		defaultOtherChannels.add(new ChannelItem(10, "房产", 3, 0));
+		defaultOtherChannels.add(new ChannelItem(11, "社会", 4, 0));
+		defaultOtherChannels.add(new ChannelItem(12, "情感", 5, 0));
+		defaultOtherChannels.add(new ChannelItem(13, "女人", 6, 0));
+		defaultOtherChannels.add(new ChannelItem(14, "旅游", 7, 0));
+		defaultOtherChannels.add(new ChannelItem(15, "健康", 8, 0));
+		defaultOtherChannels.add(new ChannelItem(16, "美女", 9, 0));
+		defaultOtherChannels.add(new ChannelItem(17, "游戏", 10, 0));
+		defaultOtherChannels.add(new ChannelItem(18, "数码", 11, 0));
 	}
 
 	private ChannelManage(SQLHelper paramDBHelper) throws SQLException {
@@ -54,7 +54,7 @@ public class ChannelManage {
 	}
 
 	/**
-	 * ??????????????
+	 * 初始化频道管理类
 	 * @param paramDBHelper
 	 * @throws SQLException
 	 */
@@ -65,14 +65,14 @@ public class ChannelManage {
 	}
 
 	/**
-	 * ??????е????
+	 * 清除所有的频道
 	 */
 	public void deleteAllChannel() {
 		channelDao.clearFeedTable();
 	}
 	/**
-	 * ???????????
-	 * @return ?????????????? ? ???????????????? : ???????????? ;
+	 * 获取其他的频道
+	 * @return 数据库存在用户配置 ? 数据库内的用户选择频道 : 默认用户选择频道 ;
 	 */
 	public List<ChannelItem> getUserChannel() {
 		Object cacheList = channelDao.listCache(SQLHelper.SELECTED + "= ?",new String[] { "1" });
@@ -96,8 +96,8 @@ public class ChannelManage {
 	}
 	
 	/**
-	 * ???????????
-	 * @return ?????????????? ? ?????????????? : ?????????? ;
+	 * 获取其他的频道
+	 * @return 数据库存在用户配置 ? 数据库内的其它频道 : 默认其它频道 ;
 	 */
 	public List<ChannelItem> getOtherChannel() {
 		Object cacheList = channelDao.listCache(SQLHelper.SELECTED + "= ?" ,new String[] { "0" });
@@ -123,7 +123,7 @@ public class ChannelManage {
 	}
 	
 	/**
-	 * ????????????????
+	 * 保存用户频道到数据库
 	 * @param userList
 	 */
 	public void saveUserChannel(List<ChannelItem> userList) {
@@ -136,7 +136,7 @@ public class ChannelManage {
 	}
 	
 	/**
-	 * ?????????????????
+	 * 保存其他频道到数据库
 	 * @param otherList
 	 */
 	public void saveOtherChannel(List<ChannelItem> otherList) {
@@ -149,7 +149,7 @@ public class ChannelManage {
 	}
 	
 	/**
-	 * ??????????????????
+	 * 初始化数据库内的频道数据
 	 */
 	private void initDefaultChannel(){
 		Log.d("deleteAll", "deleteAll");
