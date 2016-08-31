@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SmallSiri/SmallSiri.iml" filepath="$PROJECT_DIR$/SmallSiri/SmallSiri.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Tools.iml" filepath="$PROJECT_DIR$/Tools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TopNewGrid/TopNewGrid.iml" filepath="$PROJECT_DIR$/TopNewGrid/TopNewGrid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jpush/jpush.iml" filepath="$PROJECT_DIR$/jpush/jpush.iml" />
+    </modules>
+  </component>
+</project>
