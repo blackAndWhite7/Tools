@@ -1,0 +1,18 @@
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <com.tools.wei.diyonoff.ToggleView
+        android:id="@+id/toggleView"
+        android:layout_centerInParent="true"
+        app:switch_background="@drawable/switch_background"
+        app:slide_button="@drawable/slide_button"
+        app:switch_state="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

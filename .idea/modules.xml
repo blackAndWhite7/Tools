@@ -5,8 +5,12 @@
       <module fileurl="file://$PROJECT_DIR$/SmallSiri/SmallSiri.iml" filepath="$PROJECT_DIR$/SmallSiri/SmallSiri.iml" />
       <module fileurl="file://$PROJECT_DIR$/Tools.iml" filepath="$PROJECT_DIR$/Tools.iml" />
       <module fileurl="file://$PROJECT_DIR$/TopNewGrid/TopNewGrid.iml" filepath="$PROJECT_DIR$/TopNewGrid/TopNewGrid.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/YoukuMenu/app.iml" filepath="$PROJECT_DIR$/YoukuMenu/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ZXingCodeLibs/ZXingCodeLibs.iml" filepath="$PROJECT_DIR$/ZXingCodeLibs/ZXingCodeLibs.iml" />
       <module fileurl="file://$PROJECT_DIR$/jpush/jpush.iml" filepath="$PROJECT_DIR$/jpush/jpush.iml" />
+      <module fileurl="file://$PROJECT_DIR$/下拉选择/下拉选择.iml" filepath="$PROJECT_DIR$/下拉选择/下拉选择.iml" />
+      <module fileurl="file://$PROJECT_DIR$/图片轮播/图片轮播.iml" filepath="$PROJECT_DIR$/图片轮播/图片轮播.iml" />
+      <module fileurl="file://$PROJECT_DIR$/自定义开关/自定义开关.iml" filepath="$PROJECT_DIR$/自定义开关/自定义开关.iml" />
     </modules>
   </component>
 </project>
