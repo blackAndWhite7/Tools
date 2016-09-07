@@ -77,9 +77,11 @@ public class ToggleView extends View {
 		paint = new Paint();
 	}
 
-	
+
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		// switchBackgroupBitmap 之所以不为空，是因为onMeasure 方法在MainActivity中onCreate后执行，
+		// 而在onCreate 中已经调用setSwitchBackgroundResource 给它赋值了
 		setMeasuredDimension(switchBackgroupBitmap.getWidth(), switchBackgroupBitmap.getHeight());
 	}
 
@@ -120,7 +122,6 @@ public class ToggleView extends View {
 	}
 	
 	boolean isTouchMode = false;
-	private OnSwitchStateUpdateListener onSwitchStateUpdateListener;
 	// 重写触摸事件, 响应用户的触摸.
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
@@ -187,6 +188,8 @@ public class ToggleView extends View {
 	public void setSwitchState(boolean mSwitchState) {
 		this.mSwitchState = mSwitchState;
 	}
+
+	private OnSwitchStateUpdateListener onSwitchStateUpdateListener;
 	
 	public interface OnSwitchStateUpdateListener{
 		// 状态回调, 把当前状态传出去
