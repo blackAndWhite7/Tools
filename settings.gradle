@@ -1,1 +1,1 @@
-include ':YoukuMenu', ':jpush', ':SmallSiri', ':TopNewGrid', ':ZXingCodeLibs', ':图片轮播', ':下拉选择', ':自定义开关', ':下拉刷新'
+include ':YoukuMenu', ':jpush', ':SmallSiri', ':TopNewGrid', ':ZXingCodeLibs', ':图片轮播', ':下拉选择', ':自定义开关', ':下拉刷新', ':侧滑菜单'
